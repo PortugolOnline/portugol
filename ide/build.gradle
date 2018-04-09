@@ -1,0 +1,44 @@
+apply plugin: 'java'
+
+version = '1.0.3'
+
+dependencies {
+	compile project(":interpretador")
+	compile files('../lib/autocomplete.jar')
+	compile files('../lib/rsyntaxtextarea.jar')
+	provided files("$System.env.JAVA_HOME/jre/lib/javaws.jar")
+	provided 'com.google.code.findbugs:jsr305:3.0.2'
+}
+
+jar {
+    dependsOn configurations.runtime
+    manifest {
+        attributes "Main-Class": "br.com.vinyanalista.portugol.ide.Aplicativo"
+    }
+    from {
+        (configurations.runtime - configurations.provided).collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    } {
+        exclude "META-INF/*.SF"
+        exclude "META-INF/*.DSA"
+        exclude "META-INF/*.RSA"
+        exclude "org/fife/ui/rsyntaxtextarea/modes/(!{AbstractTokenMaker,PlainTextTokenMaker}).class"
+        exclude 'theme.dtd'
+    }
+    // TODO Assinar JAR (por causa do Java Web Start)
+    // Antes de compilar, executar:
+    // $ keytool -genkey -alias portugol -keyalg RSA -keysize 2048 -keystore ~/.keystore.jks
+    /*doLast {
+        new File("${buildDir}/signed").mkdirs();
+        ant.signjar(
+            alias: 'portugol',
+            destDir: "${buildDir}/signed",
+            jar: "${buildDir}/libs/*.jar",
+            keystore: '~/.keystore.jks',
+            preservelastmodified: 'true',
+            storepass: '123456',
+            storetype: 'jks'
+        )
+    }*/
+}

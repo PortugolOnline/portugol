@@ -1,0 +1,18 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
+allprojects {
+    configurations {
+        provided
+        compile.extendsFrom provided
+    }
+    repositories {
+        jcenter()
+    }
+    tasks.withType(JavaCompile) {
+        sourceCompatibility = '1.6'
+    }
+}
