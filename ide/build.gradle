@@ -19,13 +19,28 @@ jar {
         (configurations.runtime - configurations.provided).collect {
             it.isDirectory() ? it : zipTree(it)
         }
-    } {
-        exclude "META-INF/*.SF"
-        exclude "META-INF/*.DSA"
-        exclude "META-INF/*.RSA"
-        exclude "org/fife/ui/rsyntaxtextarea/modes/(!{AbstractTokenMaker,PlainTextTokenMaker}).class"
-        exclude 'theme.dtd'
     }
+
+    include 'br/**'
+    include 'org/fife/io/**'
+    include 'org/fife/print/**'
+    include 'org/fife/ui/autocomplete/**'
+    include 'org/fife/ui/rsyntaxtextarea/focusabletip/**'
+    include 'org/fife/ui/rsyntaxtextarea/folding/**'
+    include 'org/fife/ui/rsyntaxtextarea/parser/**'
+    include 'org/fife/ui/rsyntaxtextarea/templates/**'
+    include 'org/fife/ui/rsyntaxtextarea/themes/**'
+
+    // Todo esse esforço para excluir do JAR vários arquivos não utilizados
+    // dessa pasta:
+    include 'org/fife/ui/rsyntaxtextarea/modes/PlainTextTokenMaker.class'
+    include 'org/fife/ui/rsyntaxtextarea/modes/WindowsBatchTokenMaker*.class'
+
+    include 'org/fife/ui/rsyntaxtextarea/*.class'
+    include 'org/fife/ui/rsyntaxtextarea/*.properties'
+    include 'org/fife/ui/rtextarea/**'
+    include 'org/fife/util/**'
+    include '*.xml'
 }
 
 // Assinatura do JAR: requisito para o Java Web Start
