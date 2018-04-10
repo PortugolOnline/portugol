@@ -1,9 +1,11 @@
 apply plugin: 'java'
+apply plugin: 'application'
 
+mainClassName = 'br.com.vinyanalista.portugol.ide.Aplicativo'
 version = '1.0.3'
 
 dependencies {
-	compile project(":interpretador")
+	compile project(':interpretador')
 	compile files('../lib/autocomplete.jar')
 	compile files('../lib/rsyntaxtextarea.jar')
 	provided files("$System.env.JAVA_HOME/jre/lib/javaws.jar")
@@ -13,7 +15,7 @@ dependencies {
 jar {
     dependsOn configurations.runtime
     manifest {
-        attributes "Main-Class": "br.com.vinyanalista.portugol.ide.Aplicativo"
+        attributes 'Main-Class': mainClassName
     }
     from {
         (configurations.runtime - configurations.provided).collect {
@@ -56,7 +58,6 @@ def keyAlias = 'portugol'
 
 task signJar(dependsOn: jar) {
     doLast {
-        println ":$project.name:${name}"
         def signdir = new File("$buildDir/libs/signed")
         signdir.mkdirs()
         ant.signjar(
