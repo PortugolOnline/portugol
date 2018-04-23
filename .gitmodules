@@ -1,0 +1,9 @@
+[submodule "gramatica"]
+	path = gramatica
+	url = git@github.com:PortugolOnline/gramatica.git
+[submodule "interpretador"]
+	path = interpretador
+	url = git@github.com:PortugolOnline/interpretador.git
+[submodule "ide"]
+	path = ide
+	url = git@github.com:PortugolOnline/ide.git
