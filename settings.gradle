@@ -1,1 +1,1 @@
-include 'gramatica', 'interpretador', 'ide'
+include 'gramatica', 'interpretador', 'ide', 'android'
