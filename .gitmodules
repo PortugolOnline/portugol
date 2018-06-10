@@ -7,3 +7,6 @@
 [submodule "ide"]
 	path = ide
 	url = git@github.com:PortugolOnline/ide.git
+[submodule "android"]
+	path = android
+	url = git@github.com:PortugolOnline/android.git
